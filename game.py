@@ -12,7 +12,7 @@ def read_input(path: str):
         for line in file:
             lines.append(line.strip())
     return lines
-#print(read_input('D:/hello/input.txt'))
+
 
 def left_to_right_check(input_line: str, pivot: int):
     """
@@ -36,7 +36,6 @@ def left_to_right_check(input_line: str, pivot: int):
     if summ >= pivot:
         return True
     return False
-#print(left_to_right_check("412453*", 4))
 
 
 def check_not_finished_board(board: list):
@@ -56,7 +55,6 @@ def check_not_finished_board(board: list):
         if '?' in board[i]:
             return False
     return True
-#print(check_not_finished_board(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
 
 
 def check_uniqueness_in_rows(board: list):
@@ -82,7 +80,7 @@ def check_uniqueness_in_rows(board: list):
             else:
                 return False
     return True
-#print(check_uniqueness_in_rows(['***21**', '452453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
+
 
 def check_horizontal_visibility(board: list):
     """
@@ -117,7 +115,7 @@ def check_horizontal_visibility(board: list):
             if not left_to_right_check(input_line = reverse[i], pivot = int(right_prompts[i])):
                 return False
     return True
-#print(check_horizontal_visibility(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
+
 
 def check_columns(board: list):
     """
@@ -165,8 +163,6 @@ def check_columns(board: list):
             if not left_to_right_check(input_line = columns[i], pivot = int(right_prompts[i])):
                 return False
     return True
-
-#print(check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
 
 
 def check_skyscrapers(input_path: str):
