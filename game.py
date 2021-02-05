@@ -99,25 +99,29 @@ def check_horizontal_visibility(board: list):
     False
     """
     left_prompts, right_prompts = [], []
+    reverse = []
     j = 0
     for i in range(1, len(board) - 1):
         left_prompts.append(board[i][0])
         right_prompts.append(board[i][-1])
-        #board[i] = board[i][1:-1]
     board = board[1:-1]
     for i in range(len(board)):
         if left_prompts[i] != '*':
-            input_line = board[i]
-            pivot = left_prompts[i]
             if not left_to_right_check(input_line = board[i], pivot = int(left_prompts[i])):
                 return False
+    for i in range(len(board)):
+        reverse.append(board[i][::-1])
+    for i in range(len(reverse)):
+        if right_prompts[i] != '*':
+            if not left_to_right_check(input_line = reverse[i], pivot = int(right_prompts[i])):
+                return False
     return True
-
-#print(check_horizontal_visibility(['***21**', '452453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
+#print(check_horizontal_visibility(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
 
 def check_columns(board: list):
     """
-    Check column-wise compliance of the board for uniqueness (buildings of unique height) and visibility (top-bottom and vice versa).
+    Check column-wise compliance of the board for uniqueness
+    (buildings of unique height) and visibility (top-bottom and vice versa).
 
     Same as for horizontal cases, but aggregated in one function for vertical case, i.e. columns.
 
@@ -143,8 +147,10 @@ def check_columns(board: list):
                 lst.append(row[k])
             else:
                 return False
+    
     return True
-#print(check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41232*', '*2*1***']))
+
+print(check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41232*', '*2*1***']))
 
 
 def check_skyscrapers(input_path: str):
