@@ -1,3 +1,4 @@
+"""git repo link: https://github.com/vsaliievaa/Skyscrapers-Game"""
 def read_input(path: str):
     """
     Read game board file from path.
@@ -147,10 +148,25 @@ def check_columns(board: list):
                 lst.append(row[k])
             else:
                 return False
-    
+    right_prompts, left_prompts = [], []
+
+    for i in range(1, len(columns) - 1):
+        left_prompts.append(columns[i][0])
+        right_prompts.append(columns[i][-1])
+    columns = columns[1:-1]
+    for i in range(len(columns)):
+        if left_prompts[i] != '*':
+            if not left_to_right_check(input_line = columns[i], pivot = int(left_prompts[i])):
+                return False
+    for i in range(len(columns)):
+        columns[i] = columns[i][::-1]
+    for i in range(len(columns)):
+        if right_prompts[i] != '*':
+            if not left_to_right_check(input_line = columns[i], pivot = int(right_prompts[i])):
+                return False
     return True
 
-print(check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41232*', '*2*1***']))
+#print(check_columns(['***21**', '412453*', '423145*', '*543215', '*35214*', '*41532*', '*2*1***']))
 
 
 def check_skyscrapers(input_path: str):
@@ -166,6 +182,3 @@ def check_skyscrapers(input_path: str):
     if check_uniqueness_in_rows(board) and check_not_finished_board(board):
         is_winning = check_horizontal_visibility(board) and check_columns(board)
     return is_winning
-
-#if __name__ == "__main__":
-    #print(check_skyscrapers("check.txt"))
